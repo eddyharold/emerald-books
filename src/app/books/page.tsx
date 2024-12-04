@@ -1,8 +1,10 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-import Hero from "@/app/books/_components/hero";
-import CollectionList from "./_components/collection-list";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@/app/books/_components/hero"));
+const CollectionList = dynamic(() => import("@/app/books/_components/collection-list"));
 
 export default function HomePage() {
   return (
