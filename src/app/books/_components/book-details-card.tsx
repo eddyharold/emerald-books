@@ -8,6 +8,7 @@ import { Globe2, BookOpen, ShoppingBag } from "lucide-react";
 import { Book as BookType } from "@/core/models/book";
 import VisuallyHidden from "@/components/ui/visually-hidden";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 
 type BookDetailsCardProps = {
@@ -17,6 +18,8 @@ type BookDetailsCardProps = {
 };
 
 export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
+  const [expand, setExpand] = useState(false);
+
   return (
     <div className="relative space-y-6 z-20">
       <div className="space-y-4">
@@ -40,9 +43,7 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
                   <h3 className="text-lg font-semibold">{book?.author.name}</h3>
                 </div>
 
-                <p className="text-sm text-muted-foreground text-justify leading-relaxed line-clamp-3 md:line-clamp-none">
-                  {book?.author.description}
-                </p>
+                <p className="text-sm text-muted-foreground text-justify leading-relaxed">{book?.author.description}</p>
               </div>
             </PopoverContent>
           </Popover>
@@ -92,7 +93,21 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
         </div>
       </div>
 
-      <div className="leading-relaxed">{book?.description}</div>
+      <div className="space-y-2">
+        <AnimatePresence initial={false}>
+          <motion.p
+            initial={{ height: expand ? "auto" : "3em" }}
+            animate={{ height: expand ? "auto" : "3em" }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden leading-relaxed"
+          >
+            {book?.description}
+          </motion.p>
+        </AnimatePresence>
+        <button className="text-brand-950 hover:underline md:hidden" onClick={() => setExpand(!expand)}>
+          {expand ? "View Less" : "View More"}
+        </button>
+      </div>
 
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="font-bold text-brand-950 font-recoleta text-2xl md:text-3xl">{book?.price} FCFA</div>
