@@ -93,7 +93,7 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 md:hidden">
         <AnimatePresence initial={false}>
           <motion.p
             initial={{ height: expand ? "auto" : "3em" }}
@@ -107,6 +107,10 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
         <button className="text-brand-950 hover:underline md:hidden" onClick={() => setExpand(!expand)}>
           {expand ? "View Less" : "View More"}
         </button>
+      </div>
+
+      <div className="hidden md:block">
+        <p className="leading-relaxed">{book?.description}</p>
       </div>
 
       <div className="flex items-center justify-between flex-wrap gap-4">
