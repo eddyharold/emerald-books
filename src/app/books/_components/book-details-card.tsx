@@ -40,7 +40,9 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
                   <h3 className="text-lg font-semibold">{book?.author.name}</h3>
                 </div>
 
-                <p className="text-sm text-muted-foreground text-justify leading-relaxed">{book?.author.description}</p>
+                <p className="text-sm text-muted-foreground text-justify leading-relaxed line-clamp-7 md:line-clamp-none">
+                  {book?.author.description}
+                </p>
               </div>
             </PopoverContent>
           </Popover>
@@ -93,9 +95,9 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
       <div className="leading-relaxed">{book?.description}</div>
 
       <div className="flex items-center justify-between flex-wrap gap-4">
-        <div className="font-bold text-brand-950 font-recoleta text-3xl">{book?.price} FCFA</div>
+        <div className="font-bold text-brand-950 font-recoleta text-2xl md:text-3xl">{book?.price} FCFA</div>
 
-        <div className="flex items-center gap-2 border border-dashed border-brand-950/40 rounded-lg px-3 py-1.5 bg-brand-50">
+        <div className="flex items-center gap-2 border border-dashed border-brand-950/40 rounded-lg px-3 py-1.5 bg-brand-50 text-sm md:text-base">
           <Globe2 className="h-4 w-4" />
           <span>Available in {book?.characteristics.language}</span>
         </div>
