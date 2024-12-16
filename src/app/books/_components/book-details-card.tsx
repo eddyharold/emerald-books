@@ -40,7 +40,7 @@ export function BookDescription({ book }: Pick<BookDetailsCardProps, "book">) {
                   <h3 className="text-lg font-semibold">{book?.author.name}</h3>
                 </div>
 
-                <p className="text-sm text-muted-foreground text-justify leading-relaxed line-clamp-7 md:line-clamp-none">
+                <p className="text-sm text-muted-foreground text-justify leading-relaxed line-clamp-3 md:line-clamp-none">
                   {book?.author.description}
                 </p>
               </div>
