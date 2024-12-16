@@ -5,8 +5,8 @@ import { PRIMARY_COLOR } from "@/core/constants/colors";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MOCK_COLLECTIONS } from "@/core/data/collections";
-
-type Collection = "ALL" | "PRINCIPIUM" | "DIKTION" | "FOX";
+import { MOCK_BOOKS_COLLECTIONS } from "@/core/data/books";
+import { Collection } from "@/core/models/collection";
 
 const Hero = () => {
   const searchParams = useSearchParams();
@@ -30,34 +30,16 @@ const Hero = () => {
     >
       <div className="h-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 container text-muted">
         <div className="grid grid-cols-4 gap-2 lg:hidden">
-          <Link
-            href="/books"
-            data-state={seletedCollection === "ALL" && "active"}
-            className="text-sm cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-center data-[state=active]:bg-brand-200 data-[state=active]:text-primary"
-          >
-            All books
-          </Link>
-          <Link
-            href="/books?collection=PRINCIPIUM"
-            data-state={seletedCollection === "PRINCIPIUM" && "active"}
-            className="text-sm cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-center data-[state=active]:bg-brand-200 data-[state=active]:text-primary"
-          >
-            Principium
-          </Link>
-          <Link
-            href="/books?collection=DIKTION"
-            data-state={seletedCollection === "DIKTION" && "active"}
-            className="text-sm cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-center data-[state=active]:bg-brand-200 data-[state=active]:text-primary"
-          >
-            Diktion
-          </Link>
-          <Link
-            href="/books?collection=FOX"
-            data-state={seletedCollection === "FOX" && "active"}
-            className="text-sm cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-center data-[state=active]:bg-brand-200 data-[state=active]:text-primary"
-          >
-            Fox
-          </Link>
+          {Object.entries(MOCK_BOOKS_COLLECTIONS).map(([key, name]) => (
+            <Link
+              key={`collection-mobile-${key}`}
+              href={key === "ALL" ? "/books" : `/books?collection=${key}`}
+              data-state={seletedCollection === key && "active"}
+              className="text-sm cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-center data-[state=active]:bg-brand-200 data-[state=active]:text-primary"
+            >
+              {name}
+            </Link>
+          ))}
         </div>
 
         <div className="space-y-4 flex-grow">
@@ -66,34 +48,16 @@ const Hero = () => {
         </div>
 
         <div className="hidden lg:flex flex-col w-[15rem] gap-2">
-          <Link
-            href="/books"
-            data-state={seletedCollection === "ALL" && "active"}
-            className="cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-right data-[state=active]:bg-brand-200  data-[state=active]:text-primary"
-          >
-            All books
-          </Link>
-          <Link
-            href="/books?collection=PRINCIPIUM"
-            data-state={seletedCollection === "PRINCIPIUM" && "active"}
-            className="cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-right data-[state=active]:bg-brand-200  data-[state=active]:text-primary"
-          >
-            Principium
-          </Link>
-          <Link
-            href="/books?collection=DIKTION"
-            data-state={seletedCollection === "DIKTION" && "active"}
-            className="cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-right data-[state=active]:bg-brand-200  data-[state=active]:text-primary"
-          >
-            Diktion
-          </Link>
-          <Link
-            href="/books?collection=FOX"
-            data-state={seletedCollection === "FOX" && "active"}
-            className="cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-right data-[state=active]:bg-brand-200  data-[state=active]:text-primary"
-          >
-            Fox
-          </Link>
+          {Object.entries(MOCK_BOOKS_COLLECTIONS).map(([key, name]) => (
+            <Link
+              key={`collection-desktop-${key}`}
+              href={key === "ALL" ? "/books" : `/books?collection=${key}`}
+              data-state={seletedCollection === key && "active"}
+              className="cursor-pointer rounded-lg font-semibold p-2.5 w-full hover:bg-brand-200 hover:text-primary text-right data-[state=active]:bg-brand-200  data-[state=active]:text-primary"
+            >
+              {name}
+            </Link>
+          ))}
         </div>
       </div>
     </div>
